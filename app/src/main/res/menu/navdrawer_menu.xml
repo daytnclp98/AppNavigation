@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/rulesFragment"
@@ -8,6 +7,6 @@
         android:title="@string/rules" />
     <item
         android:id="@+id/aboutFragment"
-        android:icon="@drawable/android"
+        android:icon="@drawable/rules"
         android:title="@string/about" />
 </menu>
