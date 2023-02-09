@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+//Dayanna TENECELA
 package com.example.android.navigation
 
 import android.content.Intent
@@ -28,33 +28,30 @@ import com.example.android.navigation.databinding.FragmentGameWonBinding
 
 
 class GameWonFragment : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val binding: FragmentGameWonBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_game_won, container, false
         )
-        binding.nextMatchButton.setOnClickListener { view: View? ->
-
-            if (view != null) {
-                view.findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)
-            }
+        binding.nextMatchButton.setOnClickListener { view: View ->
+            view.findNavController()
+                .navigate(GameWonFragmentDirections.actionGameWonFragmentToGameFragment())
         }
-        val args = GameWonFragmentArgs.fromBundle(arguments)
+        var args = GameWonFragmentArgs.fromBundle(arguments!!)
         Toast.makeText(
-            context,
-            "NumCorrect : ${args.numCorrect}, NumQuestions: ${args.numQuestions}",
+            context, "NumCorrect: ${args.numCorrect},NumQuestions:${args.numQuestions}",
             Toast.LENGTH_LONG
         ).show()
         setHasOptionsMenu(true)
         return binding.root
     }
 
+        // Showing the Share Menu Item Dynamically
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater?.inflate(R.menu.winner_menu, menu)
+        // check if the activity resolves
         if (null == getShareIntent().resolveActivity(activity!!.packageManager)){
             menu?.findItem(R.id.share)?.setVisible(false)
         }
@@ -62,22 +59,22 @@ class GameWonFragment : Fragment() {
 
 
 
-
-
-    private fun getShareIntent () : Intent {
-        var args = GameWonFragmentArgs.fromBundle(arguments)
+    private fun getShareIntent() : Intent {
+        var args = GameWonFragmentArgs.fromBundle(arguments!!)
         return ShareCompat.IntentBuilder.from(activity!!)
             .setText(getString(R.string.share_success_text, args.numCorrect, args.numQuestions))
-            .setType("text/plain")
+            .setType("texte/plain")
             .intent
     }
+
+
 
     private fun shareSuccess(){
         startActivity(getShareIntent())
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item!!.itemId) {
+        when (item!!.itemId){
             R.id.share -> shareSuccess()
         }
         return super.onOptionsItemSelected(item)
